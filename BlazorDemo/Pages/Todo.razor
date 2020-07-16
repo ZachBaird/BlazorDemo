@@ -1,0 +1,35 @@
+﻿@page "/todo"
+<h3>Todo</h3>
+
+<ul>
+    @foreach (var todo in todos)
+    {
+        <li>@todo.Title</li>
+    }
+</ul>
+
+<input @bind-value="titleInput" placeholder="Add a todo.." />
+<button @onclick="AddTodo">Add</button>
+
+
+@code {
+    private IList<BlazorDemo.Models.TodoItem> todos = new List<BlazorDemo.Models.TodoItem>();
+
+    private string titleInput { get; set; }
+
+    private void AddTodo()
+    {
+        if (string.IsNullOrWhiteSpace(titleInput)) return;
+
+        var newTodo = new BlazorDemo.Models.TodoItem
+        {
+            Title = titleInput,
+            Done = false
+        };
+
+        todos.Add(newTodo);
+
+        // Clear existing input.
+        titleInput = string.Empty;
+    }
+}
