@@ -1,4 +1,4 @@
-﻿namespace BlazorDemo.Models
+﻿namespace BlazorDemo
 {
     public class TodoItem
     {

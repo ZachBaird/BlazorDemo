@@ -1,0 +1,15 @@
+﻿@page "/navigate"
+@inject NavigationManager NavigationManager
+
+<h3>Navigate</h3>
+
+<button class="btn btn-primary" @onclick="NavigateToCounterComponent">
+    Navigate to Counter component
+</button>
+
+@code {
+    private void NavigateToCounterComponent()
+    {
+        NavigationManager.NavigateTo("counter");
+    }
+}
