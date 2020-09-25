@@ -1,0 +1,27 @@
+﻿@page "/vehicleconfig"
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration 
+
+<h1>Configuration Example</h1>
+
+<h2>Wheels</h2>
+
+<ul>
+    <li>Count: @Configuration["wheels:count"]</li>
+    <li>Brand: @Configuration["wheels:brand"]</li>
+    <li>Type: @Configuration["wheels:brand:type"]</li>
+    <li>Year: @Configuration["wheels:year"]</li>
+</ul>
+
+<h2>Reading from cars.json</h2>
+
+<p>Size: @Configuration["tiny"]</p>
+
+<p></p>
+
+@code {
+    protected override void OnInitialized()
+    {
+        var wheelsSection = Configuration.GetSection("wheels");
+    }
+}

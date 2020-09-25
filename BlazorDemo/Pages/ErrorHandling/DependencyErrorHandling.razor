@@ -1,0 +1,49 @@
+﻿@page "/dependencyerrorhandling"
+@using BlazorDemo.Services
+@using System.Threading.Tasks
+@using Microsoft.Extensions.Logging;
+@inject IMyDependency myDependency
+@inject ILogger<DependencyErrorHandling> logger
+
+<h3>Error Handling</h3>
+
+@if (result != null)
+{
+    <p>The result is: @result</p>
+    <button @onclick="ThrowError">Throw Error</button>
+}
+else if (loadFailed)
+{
+    <p>Could not load result</p>
+}
+else
+{
+    <p>Loading..</p>
+}
+
+@code {
+    private string result;
+    private bool loadFailed;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            loadFailed = false;
+            await Task.Delay(3000);
+            result = "Hey how ya doin?";
+        }
+        catch (Exception ex)
+        {
+            loadFailed = true;
+            logger.LogError(ex.Message);
+        }
+    }
+
+    private void ThrowError()
+    {
+        result = null;
+        loadFailed = true;
+        logger.LogError("Test error");
+    }
+}

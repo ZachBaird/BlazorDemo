@@ -1,0 +1,22 @@
+﻿@page "/mydependency"
+@using Services
+@inject IMyDependency myDependency
+
+<h3>MyDependencyTest</h3>
+
+<p>@result1</p>
+<p>@result2</p>
+<p>@result3</p>
+
+@code {
+    private int result1;
+    private int result2;
+    private int result3;
+
+    protected override void OnInitialized()
+    {
+        result1 = myDependency.DoStuff(3, 5);
+        result2 = myDependency.DoStuff(5, 5);
+        result3 = myDependency.DoStuff(22, 3);
+    }
+}
